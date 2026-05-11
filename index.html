@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Trivia Universe</title>
+    <!-- Favicon -->
     <link rel="icon" href="images/trivia-favicon.png">
     <!-- Integrate bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -28,20 +29,32 @@
             <div id="tabs">
                 <ul class="nav nav-tabs nav-justified">
                     <li class="nav-item"><a href="#" class="nav-link active" aria-current="page"
-                            data-bs-toggle="tab">Category</a></li>
+                            data-bs-toggle="tab">General Knowledge</a></li>
                     <li class="nav-item"><a href="#" class="nav-link" aria-current="page"
-                            data-bs-toggle="tab">Category</a></li>
+                            data-bs-toggle="tab">Movies</a></li>
+                    <li class="nav-item"><a href="#" class="nav-link" aria-current="page" data-bs-toggle="tab">Books</a>
+                    </li>
                     <li class="nav-item"><a href="#" class="nav-link" aria-current="page"
-                            data-bs-toggle="tab">Category</a></li>
+                            data-bs-toggle="tab">Sports</a></li>
                     <li class="nav-item"><a href="#" class="nav-link" aria-current="page"
-                            data-bs-toggle="tab">Category</a></li>
-                    <li class="nav-item"><a href="#" class="nav-link" aria-current="page"
-                            data-bs-toggle="tab">Category</a></li>
+                            data-bs-toggle="tab">History</a></li>
                 </ul>
             </div>
-            <div class="question justify-content-center">
-                <div class="input-group input-group-lg"> <input type="text" class="form-control rounded-pill" style="margin: 100px; width: 50px;">
+            <div id="score" class="d-flex position-relative">
+                <h2 class="border border-5 border-dark m-2 position-absolute top-0 start-0 m-3">Current Score: 0</h2>
+            </div>
+            <div id="q-count" class="d-flex position-relative">
+                <h2 class="border border-5 border-dark position-absolute top-0 end-0 m-3">Question 1/5</h4>
+            </div>
+            <div id="question" class="justify-content-center mb-3" style="margin-top: 90px;">
+                <h3 class="pb-3 d-flex justify-content-center" style="font-size: 30px;">1.<b>insert question here</b>
+                    </h2>
+            </div>
+            <div id="user-input" class="justify-content-center pb-5 position-relative">
+                <div class="input-group input-group-lg justify-content-center"><input type="text"
+                        class="form-control rounded-pill" placeholder="Type answer here..." style="max-width: 500px;">
                 </div>
+                <button class="button position-absolute bottom-0 end-0 border rounded border-3 border-light bg-success text-light">Stuck? Take a hint!</button>
             </div>
         </div>
     </div>
