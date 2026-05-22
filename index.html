@@ -14,6 +14,7 @@
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
         crossorigin="anonymous"></script>
     <link rel="stylesheet" href="stye.css">
+    <script src="script.js" defer></script>
 </head>
 
 <body>
@@ -41,21 +42,37 @@
                 </ul>
             </div>
             <div id="score" class="d-flex position-relative">
-                <h2 class="border border-5 border-dark m-2 position-absolute top-0 start-0 m-3">Current Score: 0</h2>
+                <h2 class=" m-2 position-absolute top-0 start-0 m-3">Current Score: 0</h2>
             </div>
             <div id="q-count" class="d-flex position-relative">
-                <h2 class="border border-5 border-dark position-absolute top-0 end-0 m-3">Question 1/5</h4>
+                <h2 class=" position-absolute top-0 end-0 m-3">Question 1/10</h4>
             </div>
-            <div id="question" class="justify-content-center mb-3" style="margin-top: 90px;">
-                <h3 class="pb-3 d-flex justify-content-center" style="font-size: 30px;">1.<b>insert question here</b>
-                    </h2>
+            <div class="justify-content-center mb-3" style="margin-top: 90px;">
+                <h3 class="pb-3 d-flex justify-content-center" style="font-size: 30px;" id="question">API timeout! Please reload!</h3>
             </div>
-            <div id="user-input" class="justify-content-center pb-5 position-relative">
-                <div class="input-group input-group-lg justify-content-center"><input type="text"
-                        class="form-control rounded-pill" placeholder="Type answer here..." style="max-width: 500px;">
+            <div id="user-input" class="d-flex flex-column align-items-center pb-5">
+                <div class="fs-5">
+                    <div class="form-check mb-3">
+                        <input type="radio" class="form-check-input" id="choice1" name="quiz">
+                        <label for="choice1" class="form-check-label" id="labelChoice1">Lorem ipsum dolor sit amet.</label>
+                    </div>
+                    <div class="form-check mb-3">
+                        <input type="radio" class="form-check-input" id="choice2" name="quiz">
+                        <label for="choice2" class="form-check-label" id="labelChoice2">Lorem ipsum dolor sit amet.</label>
+                    </div>
+                    <div class="form-check mb-3">
+                        <input type="radio" class="form-check-input" id="choice3" name="quiz">
+                        <label for="choice3" class="form-check-label" id="labelChoice3">Lorem ipsum dolor sit amet.</label>
+                    </div>
+                    <div class="form-check mb-3">
+                        <input type="radio" class="form-check-input" id="choice4" name="quiz">
+                        <label for="choice4" class="form-check-label" id="labelChoice4">Lorem ipsum dolor sit amet.</label>
+                    </div>
                 </div>
-                <button class="button position-absolute bottom-0 end-0 border rounded border-3 border-light bg-success text-light">Stuck? Take a hint!</button>
+                <button class="btn btn-primary mt-3" id="submit-btn">Submit</button>                
             </div>
+
+
         </div>
     </div>
 
