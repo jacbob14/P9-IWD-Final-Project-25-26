@@ -1,0 +1,19 @@
+#tabs {
+    background-color: lightgrey;
+}
+#qs {
+    position: relative;
+}
+
+#qs::before {
+    opacity: 0.2;
+    background-image: url("/images/trivia-backdrop.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    z-index: -1;
+    inset: 0;
+    position: absolute;
+    content:"";
+
+}

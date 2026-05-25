@@ -13,7 +13,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
         crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="stye.css">
+    <link rel="stylesheet" href="style.css">
     <script src="script.js" defer></script>
 </head>
 
@@ -25,27 +25,42 @@
             <h1 class="fw-bold">Welcome to Trivia Universe!</h1>
         </header>
 
-        <!-- Main container -->
-        <div class="container-lg bg-light">
-            <div id="tabs">
-                <ul class="nav nav-tabs nav-justified">
-                    <li class="nav-item"><a href="#" class="nav-link active" aria-current="page"
-                            data-bs-toggle="tab">General Knowledge</a></li>
-                    <li class="nav-item"><a href="#" class="nav-link" aria-current="page"
-                            data-bs-toggle="tab">Movies</a></li>
-                    <li class="nav-item"><a href="#" class="nav-link" aria-current="page" data-bs-toggle="tab">Books</a>
-                    </li>
-                    <li class="nav-item"><a href="#" class="nav-link" aria-current="page"
-                            data-bs-toggle="tab">Sports</a></li>
-                    <li class="nav-item"><a href="#" class="nav-link" aria-current="page"
-                            data-bs-toggle="tab">History</a></li>
-                </ul>
+        <!-- Navigation -->
+        <nav id="tabs">
+            <ul class="nav nav-tabs nav-justified">
+                <li class="nav-item"><a href="#" class="nav-link active" aria-current="page"
+                        data-bs-toggle="tab">General Knowledge</a></li>
+                <li class="nav-item"><a href="#" class="nav-link" aria-current="page" data-bs-toggle="tab">Movies</a>
+                </li>
+                <li class="nav-item"><a href="#" class="nav-link" aria-current="page" data-bs-toggle="tab">Books</a>
+                </li>
+                <li class="nav-item"><a href="#" class="nav-link" aria-current="page" data-bs-toggle="tab">Sports</a>
+                </li>
+                <li class="nav-item"><a href="#" class="nav-link" aria-current="page" data-bs-toggle="tab">History</a>
+                </li>
+            </ul>
+        </nav>
+        <!-- Question Selection -->
+        <div class="d-flex container-lg align-items-center justify-content-center" style="height: 500px" id="qs">
+            <div class="row">
+                <h2 class="row justify-content-center">Please select a number of questions</h2>
+                <select id="qSelect" class="form-select form-select-lg mb-3">
+                    <option selected>Choose</option>
+                    <option value="1">3 Questions</option>
+                    <option value="2">5 Questions</option>
+                    <option value="3">10 Questions</option>
+                </select>
+                <button class="btn btn-primary fs-5" style="height:50px">Done</button>
             </div>
-            <div id="score" class="d-flex position-relative">
-                <h2 class=" m-2 position-absolute top-0 start-0 m-3">Current Score: 0</h2>
+
+        </div>
+        <!-- Question and User input display -->
+        <div class="container-lg bg-light d-none">
+            <div class="d-flex position-relative">
+                <h2 id="score" class="m-2 position-absolute top-0 start-0 m-3">Loading...</h2>
             </div>
-            <div id="q-count" class="d-flex position-relative">
-                <h2 class=" position-absolute top-0 end-0 m-3">Question 1/10</h4>
+            <div class="d-flex position-relative">
+                <h2 id="qCount" class=" position-absolute top-0 end-0 m-3">Loading...</h4>
             </div>
             <div class="justify-content-center mb-3" style="margin-top: 90px;">
                 <h3 class="pb-3 d-flex justify-content-center" style="font-size: 30px;" id="question">Loading...</h3>
@@ -54,19 +69,23 @@
                 <div class="fs-5">
                     <div class="form-check mb-4" id="dchoice1">
                         <input type="radio" class="form-check-input" id="choice1" name="quiz">
-                        <label for="choice1" class="form-check-label" id="labelChoice1" style="cursor: pointer">Loading...</label>
+                        <label for="choice1" class="form-check-label" id="labelChoice1"
+                            style="cursor: pointer">Loading...</label>
                     </div>
                     <div class="form-check mb-4" id="dchoice2">
                         <input type="radio" class="form-check-input" id="choice2" name="quiz">
-                        <label for="choice2" class="form-check-label" id="labelChoice2" style="cursor: pointer">Loading...</label>
+                        <label for="choice2" class="form-check-label" id="labelChoice2"
+                            style="cursor: pointer">Loading...</label>
                     </div>
                     <div class="form-check mb-4" id="dchoice3">
                         <input type="radio" class="form-check-input" id="choice3" name="quiz">
-                        <label for="choice3" class="form-check-label" id="labelChoice3" style="cursor: pointer">Loading...</label>
+                        <label for="choice3" class="form-check-label" id="labelChoice3"
+                            style="cursor: pointer">Loading...</label>
                     </div>
                     <div class="form-check mb-4" id="dchoice4">
                         <input type="radio" class="form-check-input" id="choice4" name="quiz">
-                        <label for="choice4" class="form-check-label" id="labelChoice4" style="cursor: pointer">Loading...</label>
+                        <label for="choice4" class="form-check-label" id="labelChoice4"
+                            style="cursor: pointer">Loading...</label>
                     </div>
                 </div>
                 <div class="d-flex align-items-center gap-3 mt-3">
@@ -78,7 +97,7 @@
                     <button class="btn btn-secondary mt-3 ml-5 disabled" id="prevBtn">Previous Question</button>
                     <button class="btn btn-secondary mt-3" id="nextBtn">Next Question</button>
                 </div>
-                      
+
             </div>
 
 

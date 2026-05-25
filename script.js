@@ -12,6 +12,8 @@ const nextBtn = document.querySelector("#nextBtn")
 const prevBtn = document.querySelector("#prevBtn")
 const correctH3 = document.querySelector("#correctH3")
 const incorrectH3 = document.querySelector("#incorrectH3")
+const scoreEl = document.querySelector("#score")
+const qCountEl = document.querySelector("#qCount")
 const labels = [lChoiceOne, lChoiceTwo, lChoiceThree, lChoiceFour]
 const radios = [radioOne, radioTwo, radioThree, radioFour]
 
@@ -31,8 +33,9 @@ prevBtn.addEventListener("click", () => displayQuestion("previous"))
 
 let questions = []
 let index = 0
-let currentSelect;
+let currentSelect
 let correctAns = []
+let qCount = 10
 
 async function fetchData() {
     const response = await fetch("https://opentdb.com/api.php?amount=10&category=9&difficulty=easy&type=multiple")
@@ -41,13 +44,13 @@ async function fetchData() {
         fetchData()
         return
     }
-
     const data = await response.json()
 
     questions = data.results
     questions.forEach(item => correctAns.push(item.correct_answer))
-    console.log(correctAns)
     displayQuestion()
+    scoreEl.textContent = `0`
+    qCountEl.textContent = `0/10`
 }
 
 function displayQuestion(nextPrev) {
@@ -112,15 +115,12 @@ function curSelect(item) {
 
 function checkAnswer() {
     if (labels[currentSelect - 1].textContent === correctAns[index]) {
-        console.log("correct")
         correctH3.classList.remove("d-none")
         incorrectH3.classList.add("d-none")
 
     }
     else {
-        console.log("incorrect")
         incorrectH3.classList.remove("d-none")
-        
     }
 }
 
