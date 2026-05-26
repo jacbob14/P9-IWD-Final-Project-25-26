@@ -7,7 +7,7 @@
 
 #qs::before, #mainContent::before {
     opacity: 0.15;
-    background-image: url("/images/trivia-backdrop.png");
+    background-image: url("images/trivia-backdrop.png");
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center center;
