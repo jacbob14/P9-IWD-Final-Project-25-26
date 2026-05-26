@@ -14,6 +14,11 @@ const correctH3 = document.querySelector("#correctH3")
 const incorrectH3 = document.querySelector("#incorrectH3")
 const scoreEl = document.querySelector("#score")
 const qCountEl = document.querySelector("#qCount")
+const qSelectBtn = document.querySelector("#qSelectBtn")
+const qs = document.querySelector("#qs")
+const mc = document.querySelector("#mainContent")
+const qSelect = document.querySelector("#qSelect")
+const qSelectLoadingText = document.querySelector("#qSelectLoadingText")
 const labels = [lChoiceOne, lChoiceTwo, lChoiceThree, lChoiceFour]
 const radios = [radioOne, radioTwo, radioThree, radioFour]
 
@@ -31,26 +36,37 @@ submitBtn.addEventListener("click", () => checkAnswer())
 nextBtn.addEventListener("click", () => displayQuestion("next"))
 prevBtn.addEventListener("click", () => displayQuestion("previous"))
 
+qSelectBtn.addEventListener("click", () => displayContent(qSelect.value))
+
 let questions = []
 let index = 0
 let currentSelect
 let correctAns = []
 let qCount = 10
 
-async function fetchData() {
-    const response = await fetch("https://opentdb.com/api.php?amount=10&category=9&difficulty=easy&type=multiple")
+async function fetchData(amount) {
+    const response = await fetch(`https://opentdb.com/api.php?amount=${amount}&category=9&difficulty=easy&type=multiple`)
     if (!response.ok) {
         question.textContent = "Loading..."
+        qSelectLoadingText.classList.remove("d-none")
         fetchData()
         return
     }
+    qSelectLoadingText.classList.add("d-none")
     const data = await response.json()
 
     questions = data.results
     questions.forEach(item => correctAns.push(item.correct_answer))
     displayQuestion()
-    scoreEl.textContent = `0`
-    qCountEl.textContent = `0/10`
+    scoreEl.textContent = `Current Score: 0`
+    qCountEl.textContent = `0/${questions.length}`
+    qs.classList.add("d-none")
+    mc.classList.remove("d-none")
+}
+
+function displayContent(amount) {
+    console.log(amount)
+    fetchData(amount)
 }
 
 function displayQuestion(nextPrev) {
@@ -62,7 +78,7 @@ function displayQuestion(nextPrev) {
         if (index > 0) {
             prevBtn.classList.remove("disabled")
         }
-        if (index === 9) {
+        if (index === questions.length - 1) {
             nextBtn.classList.add("disabled")
         }
         const item = questions[index]
@@ -79,7 +95,7 @@ function displayQuestion(nextPrev) {
         if (index === 0) {
             prevBtn.classList.add("disabled")
         }
-        if (index < 9) {
+        if (index < questions.length - 1) {
             nextBtn.classList.remove("disabled")
         }
 
@@ -124,7 +140,6 @@ function checkAnswer() {
     }
 }
 
-fetchData()
 
 
 

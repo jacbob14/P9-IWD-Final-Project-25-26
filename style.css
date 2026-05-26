@@ -1,12 +1,12 @@
 #tabs {
     background-color: lightgrey;
 }
-#qs {
+#qs, #mainContent {
     position: relative;
 }
 
-#qs::before {
-    opacity: 0.2;
+#qs::before, #mainContent::before {
+    opacity: 0.15;
     background-image: url("/images/trivia-backdrop.png");
     background-size: cover;
     background-repeat: no-repeat;
@@ -16,4 +16,24 @@
     position: absolute;
     content:"";
 
+}
+
+@keyframes fade-in-out {
+    0% {
+        opacity: 1
+    }
+
+    50% {
+        opacity: 0
+    }
+
+    100% {
+        opacity: 1
+    }
+}
+
+#qSelectLoadingText {
+    animation-name: fade-in-out;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;    
 }

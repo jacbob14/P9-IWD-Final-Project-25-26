@@ -45,17 +45,17 @@
             <div class="row">
                 <h2 class="row justify-content-center">Please select a number of questions</h2>
                 <select id="qSelect" class="form-select form-select-lg mb-3">
-                    <option selected>Choose</option>
-                    <option value="1">3 Questions</option>
-                    <option value="2">5 Questions</option>
-                    <option value="3">10 Questions</option>
+                    <option selected value="3">3 Questions</option>
+                    <option value="5">5 Questions</option>
+                    <option value="10">10 Questions</option>
                 </select>
-                <button class="btn btn-primary fs-5" style="height:50px">Done</button>
+                <button class="btn btn-primary fs-5" style="height:50px" id="qSelectBtn">Done</button>
+                <h3 id="qSelectLoadingText" class="d-flex justify-content-center mt-3 d-none">Loading...</h3>
             </div>
 
         </div>
         <!-- Question and User input display -->
-        <div class="container-lg bg-light d-none">
+        <div class="container-lg d-none" id="mainContent">
             <div class="d-flex position-relative">
                 <h2 id="score" class="m-2 position-absolute top-0 start-0 m-3">Loading...</h2>
             </div>
