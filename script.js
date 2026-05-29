@@ -19,6 +19,7 @@ const qs = document.querySelector("#qs")
 const mc = document.querySelector("#mainContent")
 const qSelect = document.querySelector("#qSelect")
 const qSelectLoadingText = document.querySelector("#qSelectLoadingText")
+const qSelectBackBtn = document.querySelector("#qSelectBackBtn")
 const labels = [lChoice1, lChoice2, lChoice3, lChoice4]
 const radios = [radio1, radio2, radio3, radio4]
 
@@ -39,6 +40,7 @@ nextBtn.addEventListener("click", () => displayQuestion("next"))
 prevBtn.addEventListener("click", () => displayQuestion("previous"))
 
 qSelectBtn.addEventListener("click", () => displayContent(qSelect.value))
+qSelectBackBtn.addEventListener("click", () => qSelectBack())
 
 let questions = []
 let index = 0
@@ -153,9 +155,6 @@ function displayQuestion(nextPrev) {
 
 function curSelect(item) {
     currentSelect = item;
-    // labels.forEach(l => l.classList.remove("bg-primary", "px-3", "py-2", "bg-opacity-25", "rounded"))
-    // labels[item - 1].classList.add("bg-primary", "px-3", "py-2", "bg-opacity-25", "rounded")
-    // labels[item - 1].classList.add("bg-primary", "px-3", "py-2", "bg-opacity-25", "rounded")
     radios[item - 1].checked = true
 }
 
