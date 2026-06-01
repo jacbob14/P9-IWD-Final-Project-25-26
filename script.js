@@ -87,7 +87,6 @@ function displayContent(amount) {
 }
 
 function displayQuestion(nextPrev) {
-    console.log(correctQuestions)
     if (nextPrev === "next") {
         correctH3.classList.add("d-none")
         incorrectH3.classList.add("d-none")
@@ -211,7 +210,7 @@ function displayQuestion(nextPrev) {
 
             correctH3.classList.add("d-none")
             incorrectH3.classList.remove("d-none")
-            
+
         }
 
         radio1.checked = false
@@ -263,7 +262,7 @@ function displayQuestion(nextPrev) {
         radio2.checked = false
         radio3.checked = false
         radio4.checked = false
-    return
+        return
     }
 }
 
@@ -281,6 +280,7 @@ function checkAnswer() {
             currentScore++
             correctQuestions.push(index)
             answeredQuestions.push(index)
+            qCountEl.textContent = `Questions answered: ${answeredQuestions.length}/${qSelect.value}`
             radio1.disabled = true
             radio2.disabled = true
             radio3.disabled = true
@@ -304,8 +304,9 @@ function checkAnswer() {
             radio3.disabled = true
             radio4.disabled = true
             submitBtn.disabled = true
-            questionGuide[index] = "incorrect" 
+            questionGuide[index] = "incorrect"
             answeredQuestions.push(index)
+            qCountEl.textContent = `Questions answered: ${answeredQuestions.length}/${qSelect.value}`
             if (answeredQuestions.length === Number(qSelect.value)) {
                 console.log("All questions submitted")
                 mc.classList.add("d-none")
@@ -318,6 +319,24 @@ function checkAnswer() {
 }
 
 function rreturn() {
+    index = 0
+    currentScore = 0
+    correctQuestions = []
+    answeredQuestions = []
+    questionGuide = {}
+    correctAns = []
+    questions = []
+
+    prevBtn.classList.add("disabled")
+    nextBtn.classList.remove("disabled")
+    radio1.disabled = false
+    radio2.disabled = false
+    radio3.disabled = false
+    radio4.disabled = false
+    correctH3.classList.add("d-none")
+    incorrectH3.classList.add("d-none")
+    submitBtn.disabled = false
+
     scoreDisplay.classList.add("d-none")
     qs.classList.remove("d-none")
 }
