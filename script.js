@@ -22,10 +22,9 @@ const qSelectLoadingText = document.querySelector("#qSelectLoadingText")
 const qSelectBackBtn = document.querySelector("#qSelectBackBtn")
 const scoreDisplay = document.querySelector("#scoreDisplay")
 const finalScoreTxt = document.querySelector("#finalScoreH2")
+const returnBtn = document.querySelector("#returnBtn")
 const labels = [lChoice1, lChoice2, lChoice3, lChoice4]
 const radios = [radio1, radio2, radio3, radio4]
-
-
 
 let correctIndex;
 
@@ -45,6 +44,7 @@ prevBtn.addEventListener("click", () => displayQuestion("previous"))
 
 qSelectBtn.addEventListener("click", () => displayContent(qSelect.value))
 qSelectBackBtn.addEventListener("click", () => qSelectBack())
+returnBtn.addEventListener("click", () => rreturn())
 
 let questions = []
 let index = 0
@@ -52,8 +52,9 @@ let currentSelect
 let correctAns = []
 let qCount = 10
 let currentScore = 0;
+let correctQuestions = []
+let questionGuide = {}
 let answeredQuestions = []
-
 
 async function fetchData(amount) {
     const response = await fetch(`https://opentdb.com/api.php?amount=${amount}&category=9&difficulty=easy&type=multiple`)
@@ -68,6 +69,11 @@ async function fetchData(amount) {
 
     questions = data.results
     questions.forEach(item => correctAns.push(item.correct_answer))
+    for (let i = 0; i < qSelect.value; i++) {
+        questionGuide[i] = "unanswered"
+    }
+    console.log(questionGuide)
+
     displayQuestion()
     scoreEl.textContent = `Current Score: ${currentScore}`
     qCountEl.textContent = `Questions answered: 0/${questions.length}`
@@ -81,7 +87,7 @@ function displayContent(amount) {
 }
 
 function displayQuestion(nextPrev) {
-    console.log(answeredQuestions)
+    console.log(correctQuestions)
     if (nextPrev === "next") {
         correctH3.classList.add("d-none")
         incorrectH3.classList.add("d-none")
@@ -111,11 +117,13 @@ function displayQuestion(nextPrev) {
             }
         }
 
-        if (answeredQuestions.includes(index)) {
+        if (correctQuestions.includes(index)) {
             radio1.disabled = true
             radio2.disabled = true
             radio3.disabled = true
             radio4.disabled = true
+            submitBtn.disabled = true
+
             correctH3.classList.remove("d-none")
             incorrectH3.classList.add("d-none")
 
@@ -125,10 +133,28 @@ function displayQuestion(nextPrev) {
             radio2.disabled = false
             radio3.disabled = false
             radio4.disabled = false
+            submitBtn.disabled = false
+
         }
+
+        if (questionGuide[index] === "incorrect") {
+            radio1.disabled = true
+            radio2.disabled = true
+            radio3.disabled = true
+            radio4.disabled = true
+            submitBtn.disabled = true
+
+            correctH3.classList.add("d-none")
+            incorrectH3.classList.remove("d-none")
+        }
+
+        radio1.checked = false
+        radio2.checked = false
+        radio3.checked = false
+        radio4.checked = false
     }
     else if (nextPrev === "previous") {
-        console.log(answeredQuestions)
+        console.log(correctQuestions)
         correctH3.classList.add("d-none")
         incorrectH3.classList.add("d-none")
 
@@ -157,11 +183,13 @@ function displayQuestion(nextPrev) {
             }
         }
 
-        if (answeredQuestions.includes(index)) {
+        if (correctQuestions.includes(index)) {
             radio1.disabled = true
             radio2.disabled = true
             radio3.disabled = true
             radio4.disabled = true
+            submitBtn.disabled = true
+
             correctH3.classList.remove("d-none")
             incorrectH3.classList.add("d-none")
         }
@@ -170,7 +198,26 @@ function displayQuestion(nextPrev) {
             radio2.disabled = false
             radio3.disabled = false
             radio4.disabled = false
+            submitBtn.disabled = false
+
         }
+
+        if (questionGuide[index] === "incorrect") {
+            radio1.disabled = true
+            radio2.disabled = true
+            radio3.disabled = true
+            radio4.disabled = true
+            submitBtn.disabled = true
+
+            correctH3.classList.add("d-none")
+            incorrectH3.classList.remove("d-none")
+            
+        }
+
+        radio1.checked = false
+        radio2.checked = false
+        radio3.checked = false
+        radio4.checked = false
     }
     else {
         const item = questions[index]
@@ -189,21 +236,39 @@ function displayQuestion(nextPrev) {
                 incorrectIndex++
             }
         }
-        
-        if (answeredQuestions.includes(index)) {
+
+        if (correctQuestions.includes(index)) {
             radio1.disabled = true
             radio2.disabled = true
             radio3.disabled = true
             radio4.disabled = true
+            submitBtn.disabled = true
+
             correctH3.classList.remove("d-none")
             incorrectH3.classList.add("d-none")
         }
-    }
+
+        if (questionGuide[index] === "incorrect") {
+            radio1.disabled = true
+            radio2.disabled = true
+            radio3.disabled = true
+            radio4.disabled = true
+            submitBtn.disabled = true
+
+            correctH3.classList.add("d-none")
+            incorrectH3.classList.remove("d-none")
+        }
+
+        radio1.checked = false
+        radio2.checked = false
+        radio3.checked = false
+        radio4.checked = false
     return
+    }
 }
 
 function curSelect(item) {
-    if (!answeredQuestions.includes(index)) {
+    if (!correctQuestions.includes(index) && questionGuide[index] !== "incorrect") {
         currentSelect = item;
         radios[item - 1].checked = true
     }
@@ -211,33 +276,50 @@ function curSelect(item) {
 }
 
 function checkAnswer() {
-    if (!answeredQuestions.includes(index)) {
+    if (!correctQuestions.includes(index)) {
         if (labels[currentSelect - 1].textContent === correctAns[index]) {
-            console.log(index + 1)
             currentScore++
+            correctQuestions.push(index)
             answeredQuestions.push(index)
             radio1.disabled = true
             radio2.disabled = true
             radio3.disabled = true
             radio4.disabled = true
+            submitBtn.disabled = true
             scoreEl.textContent = `Current Score: ${currentScore}`
             correctH3.classList.remove("d-none")
             incorrectH3.classList.add("d-none")
             if (answeredQuestions.length === Number(qSelect.value)) {
                 console.log("All questions submitted")
                 mc.classList.add("d-none")
-                finalScoreTxt.textContent = `${answeredQuestions.length} out of ${qSelect.value}`
+                finalScoreTxt.textContent = `${correctQuestions.length} out of ${qSelect.value}`
                 scoreDisplay.classList.remove("d-none")
-
             }
 
         }
         else {
             incorrectH3.classList.remove("d-none")
-
+            radio1.disabled = true
+            radio2.disabled = true
+            radio3.disabled = true
+            radio4.disabled = true
+            submitBtn.disabled = true
+            questionGuide[index] = "incorrect" 
+            answeredQuestions.push(index)
+            if (answeredQuestions.length === Number(qSelect.value)) {
+                console.log("All questions submitted")
+                mc.classList.add("d-none")
+                finalScoreTxt.textContent = `${correctQuestions.length} out of ${qSelect.value}`
+                scoreDisplay.classList.remove("d-none")
+            }
         }
     }
     return
+}
+
+function rreturn() {
+    scoreDisplay.classList.add("d-none")
+    qs.classList.remove("d-none")
 }
 
 
