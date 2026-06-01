@@ -1,11 +1,11 @@
 #tabs {
     background-color: lightgrey;
 }
-#qs, #mainContent {
+#qs, #mainContent, #scoreDisplay {
     position: relative;
 }
 
-#qs::before, #mainContent::before {
+#qs::before, #mainContent::before, #scoreDisplay::before {
     opacity: 0.15;
     background-image: url("images/trivia-backdrop.png");
     background-size: cover;

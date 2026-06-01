@@ -47,17 +47,18 @@
         <!-- Question Selection -->
         <div class="d-flex container-lg align-items-center justify-content-center" style="height: 500px" id="qs">
             <div class="row">
-                <h4 class="justify-content-center d-flex mb-3">Topic: General Knowledge</h1>
-                    <h2 class="row justify-content-center">Please select a number of questions</h2>
-                    <select id="qSelect" class="form-select form-select-lg mb-3">
-                        <option selected value="3">3 Questions</option>
-                        <option value="5">5 Questions</option>
-                        <option value="10">10 Questions</option>
-                    </select>
-                    <button class="btn btn-primary fs-5" style="height:50px" id="qSelectBtn">Done</button>
-                    <h3 id="qSelectLoadingText" class="d-flex justify-content-center mt-3 d-none">Loading...</h3>
+                <h4 class="justify-content-center d-flex mb-3">Topic: General Knowledge</h4>
+                <h2 class="row justify-content-center">Please select a number of questions</h2>
+                <select id="qSelect" class="form-select form-select-lg mb-3">
+                    <option selected value="3">3 Questions</option>
+                    <option value="5">5 Questions</option>
+                    <option value="10">10 Questions</option>
+                </select>
+                <button class="btn btn-primary fs-5" style="height:50px" id="qSelectBtn">Done</button>
+                <h3 id="qSelectLoadingText" class="d-flex justify-content-center mt-3 d-none">Loading...</h3>
             </div>
         </div>
+
         <!-- Question and User input display -->
         <div class="container-lg d-none" id="mainContent">
             <div class="d-flex position-relative">
@@ -103,31 +104,42 @@
                 </div>
 
                 <!-- Start over modal -->
-                <a class="link-primary link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover m-5 fs-5" data-bs-toggle="modal" data-bs-target="#startOverModal" style="position: absolute; bottom: 0; right: 0; cursor: pointer; padding-right: 30px">
-                    Start over.
-                </button>
-                <div class="modal" tabindex="-1" id="startOverModal">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title">Are you sure you are starting over?</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                            </div>
-                            <div class="modal-body">
-                                <p>Current progress will reset</p>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Back</button>
-                                <button id="qSelectBackBtn" class="btn btn-primary">Start over</button>
+                <a class="d-none link-primary link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover m-5 fs-5"
+                    data-bs-toggle="modal" data-bs-target="#startOverModal"
+                    style="position: absolute; bottom: 0; right: 0; cursor: pointer; padding-right: 275px"><b>Start
+                        over.</b></a>
+
+                    </button>
+                    <div class="modal" tabindex="-1" id="startOverModal">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">Are you sure you are starting over?</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <p>Current progress will reset</p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary"
+                                        data-bs-dismiss="modal">Back</button>
+                                    <button id="qSelectBackBtn" class="btn btn-primary">Start over</button>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-
             </div>
 
-
         </div>
+        <div class="d-flex d-none container-lg align-items-center justify-content-center" style="height: 500px" id="scoreDisplay">
+            <div class="row">
+                <h1 class="justify-content-center d-flex mb-3">Final Score:</h1>
+                <h2 class="row justify-content-center" id="finalScoreH2">3 out of 3</h2>
+                <button class="btn btn-primary fs-5" style="height:50px" id="returnBtn">Return</button>
+            </div>
+        </div>
+
+
     </div>
 
 
