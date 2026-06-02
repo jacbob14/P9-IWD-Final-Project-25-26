@@ -14,8 +14,10 @@ const correctH3 = document.querySelector("#correctH3")
 const incorrectH3 = document.querySelector("#incorrectH3")
 const scoreEl = document.querySelector("#score")
 const qCountEl = document.querySelector("#qCount")
-const qSelectBtn = document.querySelector("#qSelectBtn")
-const qs = document.querySelector("#qs")
+const qSelectBtnGeneral = document.querySelector("#qSelectBtnGeneral")
+const qSelectBtnMovies = document.querySelector("#qSelectBtnMovies")
+const qsGeneral = document.querySelector("#qsGeneral")
+const qsMovies = document.querySelector("#qsMovies")
 const mc = document.querySelector("#mainContent")
 const qSelect = document.querySelector("#qSelect")
 const qSelectLoadingText = document.querySelector("#qSelectLoadingText")
@@ -23,6 +25,8 @@ const qSelectBackBtn = document.querySelector("#qSelectBackBtn")
 const scoreDisplay = document.querySelector("#scoreDisplay")
 const finalScoreTxt = document.querySelector("#finalScoreH2")
 const returnBtn = document.querySelector("#returnBtn")
+const generalLink = document.querySelector("#generalLink")
+const moviesLink = document.querySelector("#moviesLink")
 const labels = [lChoice1, lChoice2, lChoice3, lChoice4]
 const radios = [radio1, radio2, radio3, radio4]
 
@@ -42,9 +46,12 @@ submitBtn.addEventListener("click", () => checkAnswer())
 nextBtn.addEventListener("click", () => displayQuestion("next"))
 prevBtn.addEventListener("click", () => displayQuestion("previous"))
 
-qSelectBtn.addEventListener("click", () => displayContent(qSelect.value))
+qSelectBtnGeneral.addEventListener("click", () => displayContent(qSelect.value, "9"))
 qSelectBackBtn.addEventListener("click", () => qSelectBack())
 returnBtn.addEventListener("click", () => rreturn())
+
+generalLink.addEventListener("click", () => displayCategory("9"))
+moviesLink.addEventListener("click", () => displayCategory("11"))
 
 let questions = []
 let index = 0
@@ -56,8 +63,24 @@ let questionGuide = {}
 let answeredQuestions = []
 let questionAnswers = {}
 
-async function fetchData(amount) {
-    const response = await fetch(`https://opentdb.com/api.php?amount=${amount}&category=9&difficulty=easy&type=multiple`)
+function displayCategory(category) {
+    if (category === "9") {
+        mc.classList.add("d-none")
+        qsGeneral.classList.remove("d-none")
+        qsMovies.classList.add("d-none")
+        
+    }
+    else if (category === "11") {
+        mc.classList.add("d-none")
+        qsGeneral.classList.add("d-none")
+        qsMovies.classList.remove("d-none")
+        
+    }
+    return
+}
+
+async function fetchData(amount, category) {
+    const response = await fetch(`https://opentdb.com/api.php?amount=${amount}&category=${category}&difficulty=easy&type=multiple`)
     if (!response.ok) {
         question.textContent = "Loading..."
         qSelectLoadingText.classList.remove("d-none")
@@ -78,13 +101,13 @@ async function fetchData(amount) {
     displayQuestion()
     scoreEl.textContent = `Current Score: ${currentScore}`
     qCountEl.textContent = `Questions answered: 0/${questions.length}`
-    qs.classList.add("d-none")
+    qsGeneral.classList.add("d-none")
+    qsMovies.classList.add("d-none")
     mc.classList.remove("d-none")
 }
 
-function displayContent(amount) {
-    console.log(amount)
-    fetchData(amount)
+function displayContent(amount, category) {
+    fetchData(amount, category)
 }
 
 function displayQuestion(nextPrev) {
@@ -379,5 +402,5 @@ function rreturn() {
     submitBtn.disabled = false
 
     scoreDisplay.classList.add("d-none")
-    qs.classList.remove("d-none")
+    qsGeneral.classList.remove("d-none")
 }
