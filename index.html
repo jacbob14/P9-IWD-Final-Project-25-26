@@ -28,50 +28,164 @@
         <!-- Navigation -->
         <nav id="tabs">
             <ul class="nav nav-tabs nav-justified">
-                <li class="nav-item"><a href="#" class="nav-link active" aria-current="page"
-                        data-bs-toggle="tab" id="generalLink">General Knowledge</a></li>
-                <li class="nav-item"><a href="#" class="nav-link" aria-current="page"
-                        data-bs-toggle="tab" id="moviesLink">Movies</a>
+                <li class="nav-item"><a href="#" class="nav-link active" aria-current="page" data-bs-toggle="tab"
+                        id="generalLink">General Knowledge</a></li>
+                <li class="nav-item"><a href="#" class="nav-link" aria-current="page" data-bs-toggle="tab"
+                        id="moviesLink">Movies</a>
                 </li>
-                <li class="nav-item"><a href="#" class="nav-link disabled" aria-current="page"
-                        data-bs-toggle="tab">Books</a>
+                <li class="nav-item"><a href="#" class="nav-link" aria-current="page" data-bs-toggle="tab"
+                        id="booksLink">Books</a>
                 </li>
-                <li class="nav-item"><a href="#" class="nav-link disabled" aria-current="page"
-                        data-bs-toggle="tab">Sports</a>
+                <li class="nav-item"><a href="#" class="nav-link" aria-current="page" data-bs-toggle="tab"
+                        id="sportsLink">Sports</a>
                 </li>
-                <li class="nav-item"><a href="#" class="nav-link disabled" aria-current="page"
-                        data-bs-toggle="tab">History</a>
+                <li class="nav-item"><a href="#" class="nav-link" aria-current="page" data-bs-toggle="tab"
+                        id="historyLink">History</a>
                 </li>
             </ul>
         </nav>
         <!-- Question Selection -->
+
+        <!-- General Knowledge -->
         <div class="d-flex container-lg align-items-center justify-content-center" style="height: 500px" id="qsGeneral">
-            <div class="row">
-                <h4 class="justify-content-center d-flex mb-3">Topic: General Knowledge</h4>
-                <h2 class="row justify-content-center">Please select a number of questions</h2>
-                <select id="qSelect" class="form-select form-select-lg mb-3">
-                    <option selected value="3">3 Questions</option>
-                    <option value="5">5 Questions</option>
-                    <option value="10">10 Questions</option>
-                </select>
+            <div class="row align-items-center" style="width: 800px">
+                <h4 class="justify-content-center d-flex mb-5">Topic: General Knowledge</h4>
+                <div class="col-md-6">
+                    <h3 class="text-center">Question amount</h3>
+                    <select id="qSelectGeneral" class="form-select form-select-lg mb-3">
+                        <option selected value="3">3 Questions</option>
+                        <option value="5">5 Questions</option>
+                        <option value="10">10 Questions</option>
+                    </select>
+                </div>
+                <div class="col-md-6">
+                    <h3 class="text-center">Time (Optional)</h3>
+                    <select id="timeSelect" class="form-select form-select-lg mb-3">
+                        <option selected value="untimed">Untimed</option>
+                        <option value="30">30 Seconds</option>
+                        <option value="60">60 Seconds</option>
+                        <option value="120">120 seconds (2 mintues)</option>
+                    </select>
+                </div>
+
                 <button class="btn btn-primary fs-5" style="height:50px" id="qSelectBtnGeneral">Done</button>
                 <h3 id="qSelectLoadingText" class="d-flex justify-content-center mt-3 d-none">Loading...</h3>
             </div>
         </div>
 
-        <div class="d-flex d-none container-lg align-items-center justify-content-center" style="height: 500px" id="qsMovies">
-            <div class="row">
-                <h4 class="justify-content-center d-flex mb-3">Topic: Movies</h4>
-                <h2 class="row justify-content-center">Please select a number of questions</h2>
-                <select id="qSelect" class="form-select form-select-lg mb-3">
-                    <option selected value="3">3 Questions</option>
-                    <option value="5">5 Questions</option>
-                    <option value="10">10 Questions</option>
-                </select>
+        <!-- Movies -->
+        <div class="d-flex d-none container-lg align-items-center justify-content-center" style="height: 500px"
+            id="qsMovies">
+            <div class="row align-items-center" style="width: 800px">
+                <h4 class="justify-content-center d-flex mb-5">Topic: Movies</h4>
+                <div class="col-md-6">
+                    <h3 class="row justify-content-center">Question amount</h3>
+                    <select id="qSelectMovies" class="form-select form-select-lg mb-3">
+                        <option selected value="3">3 Questions</option>
+                        <option value="5">5 Questions</option>
+                        <option value="10">10 Questions</option>
+                    </select>
+                </div>
+                <div class="col-md-6">
+                    <h3 class="text-center">Time (Optional)</h3>
+                    <select id="timeSelect" class="form-select form-select-lg mb-3">
+                        <option selected value="untimed">Untimed</option>
+                        <option value="30">30 Seconds</option>
+                        <option value="60">60 Seconds</option>
+                        <option value="120">120 seconds (2 mintues)</option>
+                    </select>
+                </div>
+
                 <button class="btn btn-primary fs-5" style="height:50px" id="qSelectBtnMovies">Done</button>
                 <h3 id="qSelectLoadingText" class="d-flex justify-content-center mt-3 d-none">Loading...</h3>
             </div>
         </div>
+
+        <!-- Books -->
+        <div class="d-flex d-none container-lg align-items-center justify-content-center" style="height: 500px"
+            id="qsBooks">
+            <div class="row align-items-center" style="width: 800px">
+                <h4 class="justify-content-center d-flex mb-5">Topic: Books</h4>
+                <div class="col-md-6">
+                    <h3 class="text-center">Question amount</h3>
+                    <select id="qSelectBooks" class="form-select form-select-lg mb-3">
+                        <option selected value="3">3 Questions</option>
+                        <option value="5">5 Questions</option>
+                        <option value="10">10 Questions</option>
+                    </select>
+                </div>
+                <div class="col-md-6">
+                    <h3 class="text-center">Time (Optional)</h3>
+                    <select id="timeSelect" class="form-select form-select-lg mb-3">
+                        <option selected value="untimed">Untimed</option>
+                        <option value="30">30 Seconds</option>
+                        <option value="60">60 Seconds</option>
+                        <option value="120">120 seconds (2 mintues)</option>
+                    </select>
+                </div>
+
+                <button class="btn btn-primary fs-5" style="height:50px" id="qSelectBtnBooks">Done</button>
+                <h3 id="qSelectLoadingText" class="d-flex justify-content-center mt-3 d-none">Loading...</h3>
+            </div>
+        </div>
+
+        <!-- Sports -->
+        <div class="d-flex d-none container-lg align-items-center justify-content-center" style="height: 500px"
+            id="qsSports">
+            <div class="row align-items-center" style="width: 800px">
+                <h4 class="justify-content-center d-flex mb-5">Topic: Sports</h4>
+                <div class="col-md-6">
+                    <h3 class="text-center">Question amount</h3>
+                    <select id="qSelectSports" class="form-select form-select-lg mb-3">
+                        <option selected value="3">3 Questions</option>
+                        <option value="5">5 Questions</option>
+                        <option value="10">10 Questions</option>
+                    </select>
+                </div>
+                <div class="col-md-6">
+                    <h3 class="text-center">Time (Optional)</h3>
+                    <select id="timeSelect" class="form-select form-select-lg mb-3">
+                        <option selected value="untimed">Untimed</option>
+                        <option value="30">30 Seconds</option>
+                        <option value="60">60 Seconds</option>
+                        <option value="120">120 seconds (2 mintues)</option>
+                    </select>
+                </div>
+
+                <button class="btn btn-primary fs-5" style="height:50px" id="qSelectBtnSports">Done</button>
+                <h3 id="qSelectLoadingText" class="d-flex justify-content-center mt-3 d-none">Loading...</h3>
+            </div>
+        </div>
+
+        <!-- History -->
+        <div class="d-flex d-none container-lg align-items-center justify-content-center" style="height: 500px"
+            id="qsHistory">
+            <div class="row align-items-center" style="width: 800px">
+                <h4 class="justify-content-center d-flex mb-5">Topic: History</h4>
+                <div class="col-md-6">
+                    <h3 class="text-center">Question amount</h3>
+                    <select id="qSelectHistory" class="form-select form-select-lg mb-3">
+                        <option selected value="3">3 Questions</option>
+                        <option value="5">5 Questions</option>
+                        <option value="10">10 Questions</option>
+                    </select>
+                </div>
+                <div class="col-md-6">
+                    <h3 class="text-center">Time (Optional)</h3>
+                    <select id="timeSelect" class="form-select form-select-lg mb-3">
+                        <option selected value="untimed">Untimed</option>
+                        <option value="30">30 Seconds</option>
+                        <option value="60">60 Seconds</option>
+                        <option value="120">120 seconds (2 mintues)</option>
+                    </select>
+                </div>
+
+                <button class="btn btn-primary fs-5" style="height:50px" id="qSelectBtnHistory">Done</button>
+                <h3 id="qSelectLoadingText" class="d-flex justify-content-center mt-3 d-none">Loading...</h3>
+            </div>
+        </div>
+
+
 
         <!-- Question and User input display -->
         <div class="container-lg d-none" id="mainContent">
@@ -88,23 +202,19 @@
                 <div class="fs-5">
                     <div class="form-check mb-4" id="dchoice1">
                         <input type="radio" class="form-check-input" id="choice1" name="quiz">
-                        <label for="choice1" class="form-check-label" id="labelChoice1"
-                            style="cursor: pointer"></label>
+                        <label for="choice1" class="form-check-label" id="labelChoice1" style="cursor: pointer"></label>
                     </div>
                     <div class="form-check mb-4" id="dchoice2">
                         <input type="radio" class="form-check-input" id="choice2" name="quiz">
-                        <label for="choice2" class="form-check-label" id="labelChoice2"
-                            style="cursor: pointer"></label>
+                        <label for="choice2" class="form-check-label" id="labelChoice2" style="cursor: pointer"></label>
                     </div>
                     <div class="form-check mb-4" id="dchoice3">
                         <input type="radio" class="form-check-input" id="choice3" name="quiz">
-                        <label for="choice3" class="form-check-label" id="labelChoice3"
-                            style="cursor: pointer"></label>
+                        <label for="choice3" class="form-check-label" id="labelChoice3" style="cursor: pointer"></label>
                     </div>
                     <div class="form-check mb-4" id="dchoice4">
                         <input type="radio" class="form-check-input" id="choice4" name="quiz">
-                        <label for="choice4" class="form-check-label" id="labelChoice4"
-                            style="cursor: pointer"></label>
+                        <label for="choice4" class="form-check-label" id="labelChoice4" style="cursor: pointer"></label>
                     </div>
                 </div>
                 <div class="d-flex align-items-center gap-3 mt-3">
@@ -123,29 +233,29 @@
                     style="position: absolute; bottom: 0; right: 0; cursor: pointer; padding-right: 275px"><b>Start
                         over.</b></a>
 
-                    </button>
-                    <div class="modal" tabindex="-1" id="startOverModal">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title">Are you sure you are starting over?</h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                                </div>
-                                <div class="modal-body">
-                                    <p>Current progress will reset</p>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary"
-                                        data-bs-dismiss="modal">Back</button>
-                                    <button id="qSelectBackBtn" class="btn btn-primary">Start over</button>
-                                </div>
+                </button>
+                <div class="modal" tabindex="-1" id="startOverModal">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Are you sure you are starting over?</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                            </div>
+                            <div class="modal-body">
+                                <p>Current progress will reset</p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Back</button>
+                                <button id="qSelectBackBtn" class="btn btn-primary">Start over</button>
                             </div>
                         </div>
                     </div>
+                </div>
             </div>
 
         </div>
-        <div class="d-flex d-none container-lg align-items-center justify-content-center" style="height: 500px" id="scoreDisplay">
+        <div class="d-flex d-none container-lg align-items-center justify-content-center" style="height: 500px"
+            id="scoreDisplay">
             <div class="row">
                 <h1 class="justify-content-center d-flex mb-3">Final Score:</h1>
                 <h2 class="row justify-content-center" id="finalScoreH2">3 out of 3</h2>

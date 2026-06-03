@@ -14,21 +14,41 @@ const correctH3 = document.querySelector("#correctH3")
 const incorrectH3 = document.querySelector("#incorrectH3")
 const scoreEl = document.querySelector("#score")
 const qCountEl = document.querySelector("#qCount")
-const qSelectBtnGeneral = document.querySelector("#qSelectBtnGeneral")
-const qSelectBtnMovies = document.querySelector("#qSelectBtnMovies")
-const qsGeneral = document.querySelector("#qsGeneral")
-const qsMovies = document.querySelector("#qsMovies")
+
+const labels = [lChoice1, lChoice2, lChoice3, lChoice4]
+const radios = [radio1, radio2, radio3, radio4]
+
 const mc = document.querySelector("#mainContent")
-const qSelect = document.querySelector("#qSelect")
+
+const qSelectGeneral = document.querySelector("#qSelectGeneral")
+const qSelectMovies = document.querySelector("#qSelectMovies")
+const qSelectBooks = document.querySelector("#qSelectBooks")
+const qSelectSports = document.querySelector("#qSelectSports")
+const qSelectHistory = document.querySelector("#qSelectHistory")
+
 const qSelectLoadingText = document.querySelector("#qSelectLoadingText")
 const qSelectBackBtn = document.querySelector("#qSelectBackBtn")
 const scoreDisplay = document.querySelector("#scoreDisplay")
 const finalScoreTxt = document.querySelector("#finalScoreH2")
 const returnBtn = document.querySelector("#returnBtn")
+
 const generalLink = document.querySelector("#generalLink")
 const moviesLink = document.querySelector("#moviesLink")
-const labels = [lChoice1, lChoice2, lChoice3, lChoice4]
-const radios = [radio1, radio2, radio3, radio4]
+const booksLink = document.querySelector("#booksLink")
+const sportsLink = document.querySelector("#sportsLink")
+const historyLink = document.querySelector("#historyLink")
+
+const qsGeneral = document.querySelector("#qsGeneral")
+const qsMovies = document.querySelector("#qsMovies")
+const qsBooks = document.querySelector("#qsBooks")
+const qsSports = document.querySelector("#qsSports")
+const qsHistory = document.querySelector("#qsHistory")
+
+const qSelectBtnGeneral = document.querySelector("#qSelectBtnGeneral")
+const qSelectBtnMovies = document.querySelector("#qSelectBtnMovies")
+const qSelectBtnBooks = document.querySelector("#qSelectBtnBooks")
+const qSelectBtnSports = document.querySelector("#qSelectBtnSports")
+const qSelectBtnHistory = document.querySelector("#qSelectBtnHistory")
 
 let correctIndex;
 
@@ -46,12 +66,26 @@ submitBtn.addEventListener("click", () => checkAnswer())
 nextBtn.addEventListener("click", () => displayQuestion("next"))
 prevBtn.addEventListener("click", () => displayQuestion("previous"))
 
-qSelectBtnGeneral.addEventListener("click", () => displayContent(qSelect.value, "9"))
+qSelectBtnGeneral.addEventListener("click", () => fetchData(qSelectGeneral.value, "9"))
+qSelectBtnMovies.addEventListener("click", () => fetchData(qSelectMovies.value, "11"))
+qSelectBtnBooks.addEventListener("click", () => fetchData(qSelectBooks.value, "10"))
+qSelectBtnSports.addEventListener("click", () => fetchData(qSelectSports.value, "21"))
+qSelectBtnHistory.addEventListener("click", () => fetchData(qSelectHistory.value, "23"))
+
 qSelectBackBtn.addEventListener("click", () => qSelectBack())
-returnBtn.addEventListener("click", () => rreturn())
+returnBtn.addEventListener("click", () => rreturn(true))
 
 generalLink.addEventListener("click", () => displayCategory("9"))
 moviesLink.addEventListener("click", () => displayCategory("11"))
+booksLink.addEventListener("click", () => displayCategory("10"))
+sportsLink.addEventListener("click", () => displayCategory("21"))
+historyLink.addEventListener("click", () => displayCategory("23"))
+
+generalLink.addEventListener("click", () => rreturn(false))
+moviesLink.addEventListener("click", () => rreturn(false))
+booksLink.addEventListener("click", () => rreturn(false))
+sportsLink.addEventListener("click", () => rreturn(false))
+historyLink.addEventListener("click", () => rreturn(false))
 
 let questions = []
 let index = 0
@@ -62,24 +96,69 @@ let currentScore = 0;
 let questionGuide = {}
 let answeredQuestions = []
 let questionAnswers = {}
+let currentAmount = 0;
 
 function displayCategory(category) {
     if (category === "9") {
+        a = "General"
         mc.classList.add("d-none")
         qsGeneral.classList.remove("d-none")
         qsMovies.classList.add("d-none")
-        
+        qsBooks.classList.add("d-none")
+        qsSports.classList.add("d-none")
+        qsHistory.classList.add("d-none")
+        scoreDisplay.classList.add("d-none")
+
     }
     else if (category === "11") {
+        a = "Movies"
         mc.classList.add("d-none")
         qsGeneral.classList.add("d-none")
         qsMovies.classList.remove("d-none")
-        
+        qsBooks.classList.add("d-none")
+        qsSports.classList.add("d-none")
+        qsHistory.classList.add("d-none")
+        scoreDisplay.classList.add("d-none")
+
+    }
+    else if (category === "10") {
+        a = "Books"
+        mc.classList.add("d-none")
+        qsGeneral.classList.add("d-none")
+        qsMovies.classList.add("d-none")
+        qsBooks.classList.remove("d-none")
+        qsSports.classList.add("d-none")
+        qsHistory.classList.add("d-none")
+        scoreDisplay.classList.add("d-none")
+
+    }
+    else if (category === "21") {
+        a = "Sports"
+        mc.classList.add("d-none")
+        qsGeneral.classList.add("d-none")
+        qsMovies.classList.add("d-none")
+        qsBooks.classList.add("d-none")
+        qsSports.classList.remove("d-none")
+        qsHistory.classList.add("d-none")
+        scoreDisplay.classList.add("d-none")
+
+    }
+    else if (category === "23") {
+        a = "History"
+        mc.classList.add("d-none")
+        qsGeneral.classList.add("d-none")
+        qsMovies.classList.add("d-none")
+        qsBooks.classList.add("d-none")
+        qsSports.classList.add("d-none")
+        qsHistory.classList.remove("d-none")
+        scoreDisplay.classList.add("d-none")
+
     }
     return
 }
 
 async function fetchData(amount, category) {
+    currentAmount = amount;
     const response = await fetch(`https://opentdb.com/api.php?amount=${amount}&category=${category}&difficulty=easy&type=multiple`)
     if (!response.ok) {
         question.textContent = "Loading..."
@@ -92,7 +171,7 @@ async function fetchData(amount, category) {
 
     questions = data.results
     questions.forEach(item => correctAns.push(item.correct_answer))
-    for (let i = 0; i < qSelect.value; i++) {
+    for (let i = 0; i < currentAmount; i++) {
         questionGuide[i] = "unanswered"
         questionGuide["choice" + i] = "none"
     }
@@ -103,11 +182,10 @@ async function fetchData(amount, category) {
     qCountEl.textContent = `Questions answered: 0/${questions.length}`
     qsGeneral.classList.add("d-none")
     qsMovies.classList.add("d-none")
+    qsBooks.classList.add("d-none")
+    qsSports.classList.add("d-none")
+    qsHistory.classList.add("d-none")
     mc.classList.remove("d-none")
-}
-
-function displayContent(amount, category) {
-    fetchData(amount, category)
 }
 
 function displayQuestion(nextPrev) {
@@ -144,10 +222,10 @@ function displayQuestion(nextPrev) {
             }
         }
 
-            questionAnswers[index].forEach((answer, i) => {
-                labels[i].innerHTML = answer
-            })
-        
+        questionAnswers[index].forEach((answer, i) => {
+            labels[i].innerHTML = answer
+        })
+
 
 
 
@@ -224,9 +302,9 @@ function displayQuestion(nextPrev) {
             }
         }
 
-            questionAnswers[index].forEach((answer, i) => {
-                labels[i].innerHTML = answer
-            })
+        questionAnswers[index].forEach((answer, i) => {
+            labels[i].innerHTML = answer
+        })
 
         if (questionGuide[index] === "correct") {
             radio1.disabled = true
@@ -289,10 +367,10 @@ function displayQuestion(nextPrev) {
             }
         }
 
-            questionAnswers[index].forEach((answer, i) => {
-                labels[i].innerHTML = answer
-            })
-        
+        questionAnswers[index].forEach((answer, i) => {
+            labels[i].innerHTML = answer
+        })
+
 
         if (questionGuide[index] === "correct") {
             radio1.disabled = true
@@ -342,7 +420,6 @@ function checkAnswer() {
         if (labels[currentSelect - 1].textContent === correctAns[index]) {
             currentScore++
             scoreEl.textContent = `Current Score: ${currentScore}`
-
             correctH3.classList.remove("d-none")
             radio1.disabled = true
             radio2.disabled = true
@@ -351,10 +428,10 @@ function checkAnswer() {
             submitBtn.disabled = true
             questionGuide[index] = "correct"
             answeredQuestions.push(index)
-            qCountEl.textContent = `Questions answered: ${answeredQuestions.length}/${qSelect.value}`
-            if (answeredQuestions.length === Number(qSelect.value)) {
+            qCountEl.textContent = `Questions answered: ${answeredQuestions.length}/${currentAmount}`
+            if (answeredQuestions.length === Number(currentAmount)) {
                 mc.classList.add("d-none")
-                finalScoreTxt.textContent = `${currentScore} out of ${qSelect.value}`
+                finalScoreTxt.textContent = `${currentScore} out of ${currentAmount}`
                 scoreDisplay.classList.remove("d-none")
                 console.log(questionGuide)
             }
@@ -369,11 +446,11 @@ function checkAnswer() {
             submitBtn.disabled = true
             questionGuide[index] = "incorrect"
             answeredQuestions.push(index)
-            qCountEl.textContent = `Questions answered: ${answeredQuestions.length}/${qSelect.value}`
-            if (answeredQuestions.length === Number(qSelect.value)) {
+            qCountEl.textContent = `Questions answered: ${answeredQuestions.length}/${currentAmount}`
+            if (answeredQuestions.length === Number(currentAmount)) {
                 console.log("All questions submitted")
                 mc.classList.add("d-none")
-                finalScoreTxt.textContent = `${currentScore} out of ${qSelect.value}`
+                finalScoreTxt.textContent = `${currentScore} out of ${currentAmount}`
                 scoreDisplay.classList.remove("d-none")
                 console.log(questionGuide)
             }
@@ -382,7 +459,7 @@ function checkAnswer() {
     return
 }
 
-function rreturn() {
+function rreturn(full) {
     index = 0
     currentScore = 0
     answeredQuestions = []
@@ -390,6 +467,7 @@ function rreturn() {
     correctAns = []
     questions = []
     questionAnswers = {}
+    currentAmount = 0
 
     prevBtn.classList.add("disabled")
     nextBtn.classList.remove("disabled")
@@ -401,6 +479,9 @@ function rreturn() {
     incorrectH3.classList.add("d-none")
     submitBtn.disabled = false
 
-    scoreDisplay.classList.add("d-none")
-    qsGeneral.classList.remove("d-none")
+    if (full) {
+        scoreDisplay.classList.add("d-none")
+        qsGeneral.classList.remove("d-none")
+    }
+
 }
