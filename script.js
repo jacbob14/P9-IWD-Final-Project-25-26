@@ -87,6 +87,31 @@ booksLink.addEventListener("click", () => rreturn(false))
 sportsLink.addEventListener("click", () => rreturn(false))
 historyLink.addEventListener("click", () => rreturn(false))
 
+document.addEventListener("keydown", function(e) {
+    if (e.key === "1") {
+        curSelect(1)
+    }
+    else if (e.key === "2") {
+        curSelect(2)
+    }
+    else if (e.key === "3") {
+        curSelect(3)
+    }
+    else if (e.key === "4") {
+        curSelect(4)
+    }
+    else if (e.key === "Enter") {
+        checkAnswer()
+    }
+    else if (e.key === "ArrowRight") {
+        displayQuestion("next")
+    }
+    else if (e.key === "ArrowLeft") {
+        displayQuestion("previous")
+    }
+    return
+})
+
 let questions = []
 let index = 0
 let currentSelect
