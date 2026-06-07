@@ -50,6 +50,8 @@ const qSelectBtnBooks = document.querySelector("#qSelectBtnBooks")
 const qSelectBtnSports = document.querySelector("#qSelectBtnSports")
 const qSelectBtnHistory = document.querySelector("#qSelectBtnHistory")
 
+const highScoreH3 = document.querySelector("#highScoreH3")
+
 let correctIndex;
 
 lChoice1.addEventListener("click", () => curSelect(1))
@@ -72,7 +74,6 @@ qSelectBtnBooks.addEventListener("click", () => fetchData(qSelectBooks.value, "1
 qSelectBtnSports.addEventListener("click", () => fetchData(qSelectSports.value, "21"))
 qSelectBtnHistory.addEventListener("click", () => fetchData(qSelectHistory.value, "23"))
 
-qSelectBackBtn.addEventListener("click", () => qSelectBack())
 returnBtn.addEventListener("click", () => rreturn(true))
 
 generalLink.addEventListener("click", () => displayCategory("9"))
@@ -87,7 +88,7 @@ booksLink.addEventListener("click", () => rreturn(false))
 sportsLink.addEventListener("click", () => rreturn(false))
 historyLink.addEventListener("click", () => rreturn(false))
 
-document.addEventListener("keydown", function(e) {
+document.addEventListener("keydown", function (e) {
     if (e.key === "1") {
         curSelect(1)
     }
@@ -122,6 +123,9 @@ let questionGuide = {}
 let answeredQuestions = []
 let questionAnswers = {}
 let currentAmount = 0;
+const savedHighScore = JSON.parse(localStorage.getItem("highScore")) || { score: 0, amount: 0 }
+let highScore = savedHighScore.score
+let highScoreAmount = savedHighScore.amount
 
 function displayCategory(category) {
     if (category === "9") {
@@ -188,11 +192,17 @@ async function fetchData(amount, category) {
     if (!response.ok) {
         question.textContent = "Loading..."
         qSelectLoadingText.classList.remove("d-none")
-        fetchData()
+        setTimeout(() => fetchData(amount, category), 5000)
         return
     }
     qSelectLoadingText.classList.add("d-none")
     const data = await response.json()
+
+    if (data.results.length === 0) {
+        qSelectLoadingText.classList.remove("d-none")
+        setTimeout(() => fetchData(amount, category), 5000)
+        return
+    }
 
     questions = data.results
     questions.forEach(item => correctAns.push(item.correct_answer))
@@ -455,7 +465,18 @@ function checkAnswer() {
             answeredQuestions.push(index)
             qCountEl.textContent = `Questions answered: ${answeredQuestions.length}/${currentAmount}`
             if (answeredQuestions.length === Number(currentAmount)) {
+                if (currentScore > highScore) {
+                    if (currentScore > highScore) {
+                        highScore = currentScore
+                        highScoreAmount = Number(currentAmount)
+                        localStorage.setItem("highScore", JSON.stringify({
+                            score: currentScore,
+                            amount: currentAmount
+                        }))
+                    }
+                }
                 mc.classList.add("d-none")
+                highScoreH3.textContent = `High Score: ${highScore} out of ${highScoreAmount}`
                 finalScoreTxt.textContent = `${currentScore} out of ${currentAmount}`
                 scoreDisplay.classList.remove("d-none")
                 console.log(questionGuide)
@@ -473,8 +494,19 @@ function checkAnswer() {
             answeredQuestions.push(index)
             qCountEl.textContent = `Questions answered: ${answeredQuestions.length}/${currentAmount}`
             if (answeredQuestions.length === Number(currentAmount)) {
+                if (currentScore > highScore) {
+                    if (currentScore > highScore) {
+                        highScore = currentScore
+                        highScoreAmount = Number(currentAmount) 
+                        localStorage.setItem("highScore", JSON.stringify({
+                            score: currentScore,
+                            amount: currentAmount
+                        }))
+                    }
+                }
                 console.log("All questions submitted")
                 mc.classList.add("d-none")
+                highScoreH3.textContent = `High Score: ${highScore} out of ${highScoreAmount}`
                 finalScoreTxt.textContent = `${currentScore} out of ${currentAmount}`
                 scoreDisplay.classList.remove("d-none")
                 console.log(questionGuide)
@@ -493,6 +525,7 @@ function rreturn(full) {
     questions = []
     questionAnswers = {}
     currentAmount = 0
+
 
     prevBtn.classList.add("disabled")
     nextBtn.classList.remove("disabled")

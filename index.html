@@ -50,21 +50,12 @@
         <div class="d-flex container-lg align-items-center justify-content-center" style="height: 500px" id="qsGeneral">
             <div class="row align-items-center" style="width: 800px">
                 <h4 class="justify-content-center d-flex mb-5">Topic: General Knowledge</h4>
-                <div class="col-md-6">
+                <div class="col-12">
                     <h3 class="text-center">Question amount</h3>
                     <select id="qSelectGeneral" class="form-select form-select-lg mb-3">
                         <option selected value="3">3 Questions</option>
                         <option value="5">5 Questions</option>
                         <option value="10">10 Questions</option>
-                    </select>
-                </div>
-                <div class="col-md-6">
-                    <h3 class="text-center">Time (Optional)</h3>
-                    <select id="timeSelect" class="form-select form-select-lg mb-3">
-                        <option selected value="untimed">Untimed</option>
-                        <option value="30">30 Seconds</option>
-                        <option value="60">60 Seconds</option>
-                        <option value="120">120 seconds (2 mintues)</option>
                     </select>
                 </div>
 
@@ -78,21 +69,12 @@
             id="qsMovies">
             <div class="row align-items-center" style="width: 800px">
                 <h4 class="justify-content-center d-flex mb-5">Topic: Movies</h4>
-                <div class="col-md-6">
-                    <h3 class="row justify-content-center">Question amount</h3>
+                <div class="col-12">
+                    <h3 class="text-center">Question amount</h3>
                     <select id="qSelectMovies" class="form-select form-select-lg mb-3">
                         <option selected value="3">3 Questions</option>
                         <option value="5">5 Questions</option>
                         <option value="10">10 Questions</option>
-                    </select>
-                </div>
-                <div class="col-md-6">
-                    <h3 class="text-center">Time (Optional)</h3>
-                    <select id="timeSelect" class="form-select form-select-lg mb-3">
-                        <option selected value="untimed">Untimed</option>
-                        <option value="30">30 Seconds</option>
-                        <option value="60">60 Seconds</option>
-                        <option value="120">120 seconds (2 mintues)</option>
                     </select>
                 </div>
 
@@ -106,21 +88,12 @@
             id="qsBooks">
             <div class="row align-items-center" style="width: 800px">
                 <h4 class="justify-content-center d-flex mb-5">Topic: Books</h4>
-                <div class="col-md-6">
+                <div class="col-12">
                     <h3 class="text-center">Question amount</h3>
                     <select id="qSelectBooks" class="form-select form-select-lg mb-3">
                         <option selected value="3">3 Questions</option>
                         <option value="5">5 Questions</option>
                         <option value="10">10 Questions</option>
-                    </select>
-                </div>
-                <div class="col-md-6">
-                    <h3 class="text-center">Time (Optional)</h3>
-                    <select id="timeSelect" class="form-select form-select-lg mb-3">
-                        <option selected value="untimed">Untimed</option>
-                        <option value="30">30 Seconds</option>
-                        <option value="60">60 Seconds</option>
-                        <option value="120">120 seconds (2 mintues)</option>
                     </select>
                 </div>
 
@@ -134,21 +107,12 @@
             id="qsSports">
             <div class="row align-items-center" style="width: 800px">
                 <h4 class="justify-content-center d-flex mb-5">Topic: Sports</h4>
-                <div class="col-md-6">
+                <div class="col-12">
                     <h3 class="text-center">Question amount</h3>
                     <select id="qSelectSports" class="form-select form-select-lg mb-3">
                         <option selected value="3">3 Questions</option>
                         <option value="5">5 Questions</option>
                         <option value="10">10 Questions</option>
-                    </select>
-                </div>
-                <div class="col-md-6">
-                    <h3 class="text-center">Time (Optional)</h3>
-                    <select id="timeSelect" class="form-select form-select-lg mb-3">
-                        <option selected value="untimed">Untimed</option>
-                        <option value="30">30 Seconds</option>
-                        <option value="60">60 Seconds</option>
-                        <option value="120">120 seconds (2 mintues)</option>
                     </select>
                 </div>
 
@@ -162,21 +126,12 @@
             id="qsHistory">
             <div class="row align-items-center" style="width: 800px">
                 <h4 class="justify-content-center d-flex mb-5">Topic: History</h4>
-                <div class="col-md-6">
+                <div class="col-12">
                     <h3 class="text-center">Question amount</h3>
                     <select id="qSelectHistory" class="form-select form-select-lg mb-3">
                         <option selected value="3">3 Questions</option>
                         <option value="5">5 Questions</option>
                         <option value="10">10 Questions</option>
-                    </select>
-                </div>
-                <div class="col-md-6">
-                    <h3 class="text-center">Time (Optional)</h3>
-                    <select id="timeSelect" class="form-select form-select-lg mb-3">
-                        <option selected value="untimed">Untimed</option>
-                        <option value="30">30 Seconds</option>
-                        <option value="60">60 Seconds</option>
-                        <option value="120">120 seconds (2 mintues)</option>
                     </select>
                 </div>
 
@@ -226,37 +181,13 @@
                     <button class="btn btn-secondary mt-3 ml-5 disabled" id="prevBtn">Previous Question</button>
                     <button class="btn btn-secondary mt-3" id="nextBtn">Next Question</button>
                 </div>
-
-                <!-- Start over modal -->
-                <a class="d-none link-primary link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover m-5 fs-5"
-                    data-bs-toggle="modal" data-bs-target="#startOverModal"
-                    style="position: absolute; bottom: 0; right: 0; cursor: pointer; padding-right: 275px"><b>Start
-                        over.</b></a>
-
-                </button>
-                <div class="modal" tabindex="-1" id="startOverModal">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title">Are you sure you are starting over?</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                            </div>
-                            <div class="modal-body">
-                                <p>Current progress will reset</p>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Back</button>
-                                <button id="qSelectBackBtn" class="btn btn-primary">Start over</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
 
         </div>
         <div class="d-flex d-none container-lg align-items-center justify-content-center" style="height: 500px"
             id="scoreDisplay">
             <div class="row">
+                <h3 class="text-center" id="highScoreH3"></h3>
                 <h1 class="justify-content-center d-flex mb-3">Final Score:</h1>
                 <h2 class="row justify-content-center" id="finalScoreH2">3 out of 3</h2>
                 <button class="btn btn-primary fs-5" style="height:50px" id="returnBtn">Return</button>
