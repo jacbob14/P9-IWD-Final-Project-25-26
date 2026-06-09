@@ -261,9 +261,6 @@ function displayQuestion(nextPrev) {
             labels[i].innerHTML = answer
         })
 
-
-
-
         if (questionGuide[index] === "correct") {
             radio1.disabled = true
             radio2.disabled = true
