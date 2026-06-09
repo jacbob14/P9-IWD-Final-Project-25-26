@@ -299,6 +299,7 @@ function displayQuestion(nextPrev) {
         radio2.checked = false
         radio3.checked = false
         radio4.checked = false
+        currentSelect = undefined
 
         if (questionGuide["choice" + index] !== "none") {
             curSelect(questionGuide["choice" + index], "override")
@@ -376,6 +377,7 @@ function displayQuestion(nextPrev) {
         radio2.checked = false
         radio3.checked = false
         radio4.checked = false
+        currentSelect = undefined
 
         if (questionGuide["choice" + index] !== "none") {
             curSelect(questionGuide["choice" + index], "override")
@@ -433,6 +435,7 @@ function displayQuestion(nextPrev) {
         radio2.checked = false
         radio3.checked = false
         radio4.checked = false
+        currentSelect = undefined
         return
     }
 }
@@ -450,66 +453,68 @@ function curSelect(item, action) {
 }
 
 function checkAnswer() {
-    if (questionGuide[index] === "unanswered") {
-        questionGuide["choice" + index] = currentSelect
-        if (labels[currentSelect - 1].textContent === correctAns[index]) {
-            currentScore++
-            scoreEl.textContent = `Current Score: ${currentScore}`
-            correctH3.classList.remove("d-none")
-            radio1.disabled = true
-            radio2.disabled = true
-            radio3.disabled = true
-            radio4.disabled = true
-            submitBtn.disabled = true
-            questionGuide[index] = "correct"
-            answeredQuestions.push(index)
-            qCountEl.textContent = `Questions answered: ${answeredQuestions.length}/${currentAmount}`
-            if (answeredQuestions.length === Number(currentAmount)) {
-                if (currentScore > highScore) {
+    if (currentSelect !== undefined) {
+        if (questionGuide[index] === "unanswered") {
+            questionGuide["choice" + index] = currentSelect
+            if (labels[currentSelect - 1].textContent === correctAns[index]) {
+                currentScore++
+                scoreEl.textContent = `Current Score: ${currentScore}`
+                correctH3.classList.remove("d-none")
+                radio1.disabled = true
+                radio2.disabled = true
+                radio3.disabled = true
+                radio4.disabled = true
+                submitBtn.disabled = true
+                questionGuide[index] = "correct"
+                answeredQuestions.push(index)
+                qCountEl.textContent = `Questions answered: ${answeredQuestions.length}/${currentAmount}`
+                if (answeredQuestions.length === Number(currentAmount)) {
                     if (currentScore > highScore) {
-                        highScore = currentScore
-                        highScoreAmount = Number(currentAmount)
-                        localStorage.setItem("highScore", JSON.stringify({
-                            score: currentScore,
-                            amount: currentAmount
-                        }))
+                        if (currentScore > highScore) {
+                            highScore = currentScore
+                            highScoreAmount = Number(currentAmount)
+                            localStorage.setItem("highScore", JSON.stringify({
+                                score: currentScore,
+                                amount: currentAmount
+                            }))
+                        }
                     }
+                    mc.classList.add("d-none")
+                    highScoreH3.textContent = `High Score: ${highScore} out of ${highScoreAmount}`
+                    finalScoreTxt.textContent = `${currentScore} out of ${currentAmount}`
+                    scoreDisplay.classList.remove("d-none")
+                    console.log(questionGuide)
                 }
-                mc.classList.add("d-none")
-                highScoreH3.textContent = `High Score: ${highScore} out of ${highScoreAmount}`
-                finalScoreTxt.textContent = `${currentScore} out of ${currentAmount}`
-                scoreDisplay.classList.remove("d-none")
-                console.log(questionGuide)
-            }
 
-        }
-        else {
-            incorrectH3.classList.remove("d-none")
-            radio1.disabled = true
-            radio2.disabled = true
-            radio3.disabled = true
-            radio4.disabled = true
-            submitBtn.disabled = true
-            questionGuide[index] = "incorrect"
-            answeredQuestions.push(index)
-            qCountEl.textContent = `Questions answered: ${answeredQuestions.length}/${currentAmount}`
-            if (answeredQuestions.length === Number(currentAmount)) {
-                if (currentScore > highScore) {
+            }
+            else {
+                incorrectH3.classList.remove("d-none")
+                radio1.disabled = true
+                radio2.disabled = true
+                radio3.disabled = true
+                radio4.disabled = true
+                submitBtn.disabled = true
+                questionGuide[index] = "incorrect"
+                answeredQuestions.push(index)
+                qCountEl.textContent = `Questions answered: ${answeredQuestions.length}/${currentAmount}`
+                if (answeredQuestions.length === Number(currentAmount)) {
                     if (currentScore > highScore) {
-                        highScore = currentScore
-                        highScoreAmount = Number(currentAmount) 
-                        localStorage.setItem("highScore", JSON.stringify({
-                            score: currentScore,
-                            amount: currentAmount
-                        }))
+                        if (currentScore > highScore) {
+                            highScore = currentScore
+                            highScoreAmount = Number(currentAmount)
+                            localStorage.setItem("highScore", JSON.stringify({
+                                score: currentScore,
+                                amount: currentAmount
+                            }))
+                        }
                     }
+                    console.log("All questions submitted")
+                    mc.classList.add("d-none")
+                    highScoreH3.textContent = `High Score: ${highScore} out of ${highScoreAmount}`
+                    finalScoreTxt.textContent = `${currentScore} out of ${currentAmount}`
+                    scoreDisplay.classList.remove("d-none")
+                    console.log(questionGuide)
                 }
-                console.log("All questions submitted")
-                mc.classList.add("d-none")
-                highScoreH3.textContent = `High Score: ${highScore} out of ${highScoreAmount}`
-                finalScoreTxt.textContent = `${currentScore} out of ${currentAmount}`
-                scoreDisplay.classList.remove("d-none")
-                console.log(questionGuide)
             }
         }
     }
